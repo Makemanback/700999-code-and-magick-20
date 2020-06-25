@@ -12,6 +12,28 @@ var COAT_COLORS = [
 ];
 var EYE_COLORS = ['black', 'red', 'blue', 'yellow', 'green'];
 var WIZARDS_QUANTITY = 4;
+var FIREBALLS = [
+  '#ee4830',
+  '#30a8ee',
+  '#5ce6c0',
+  '#e848d5',
+  '#e6e848'
+];
+var WIZARD_EYES = [
+  'black',
+  'red',
+  'blue',
+  'yellow',
+  'green'
+];
+var WIZARD_COATS = [
+  'rgb(101, 137, 164)',
+  'rgb(241, 43, 107)',
+  'rgb(146, 100, 161)',
+  'rgb(56, 159, 117)',
+  'rgb(215, 210, 55)',
+  'rgb(0, 0, 0)'
+];
 
 // диалоговое окно
 var userDialog = document.querySelector('.setup');
@@ -56,7 +78,6 @@ for (var j = 0; j < wizards.length; j++) {
 }
 
 similarListElement.appendChild(fragment);
-userDialog.querySelector('.setup-similar').classList.remove('hidden');
 
 // обработка событий
 
@@ -71,7 +92,7 @@ var setupWizardEyes = setupForm.querySelector('.wizard-eyes');
 var setupFireball = setupForm.querySelector('.setup-fireball-wrap');
 
 var onPopupEscPress = function (evt) {
-  if (evt.key === 'Escape') {
+  if (evt.key === 'Escape' && evt.target !== setupUserName) {
     evt.preventDefault();
     closePopup();
   }
@@ -86,11 +107,10 @@ var openPopup = function () {
 var closePopup = function () {
   userDialog.classList.add('hidden');
   document.removeEventListener('keydown', onPopupEscPress);
-  document.removeEventListener('click', onBlurSetupUserName);
-  document.removeEventListener('click', onClickSetupSubmit);
+  document.removeEventListener('click', onSubmitForm);
 };
 
-var submitForm = function () {
+var onSubmitForm = function () {
   setupForm.submit();
 };
 
@@ -115,61 +135,14 @@ setupClose.addEventListener('keydown', function (evt) {
   }
 });
 
-// на фокусе отмена эскейпа
-var onFocusSetupUserName = function (evt) {
-  evt.preventDefault();
-  document.removeEventListener('keydown', onPopupEscPress);
-};
-
-setupUserName.addEventListener('focus', onFocusSetupUserName);
-
-// на блюре возвращение эскейпа
-var onBlurSetupUserName = function (evt) {
-  evt.preventDefault();
-  document.addEventListener('keydown', onPopupEscPress);
-  document.removeEventListener('click', onFocusSetupUserName);
-};
-
-setupUserName.addEventListener('blur', onBlurSetupUserName);
-
-var onClickSetupSubmit = function () {
-  submitForm();
-};
-
-setupSubmit.addEventListener('click', onClickSetupSubmit);
-
-// массивы данных цвета
-var wizardCoats = [
-  'rgb(101, 137, 164)',
-  'rgb(241, 43, 107)',
-  'rgb(146, 100, 161)',
-  'rgb(56, 159, 117)',
-  'rgb(215, 210, 55)',
-  'rgb(0, 0, 0)'
-];
-
-var wizardEyes = [
-  'black',
-  'red',
-  'blue',
-  'yellow',
-  'green'
-];
-
-var fireballs = [
-  '#ee4830',
-  '#30a8ee',
-  '#5ce6c0',
-  '#e848d5',
-  '#e6e848'
-];
+setupSubmit.addEventListener('click', onSubmitForm);
 
 // случайный цвет заливки
 var getRandomColor = function (elem, arr) {
   elem.style.fill = getRandomArrayIndex(arr);
 };
 
-// случайный цвет бекграунда
+// случайный цвет фаербола
 var getRandomBgColor = function (elem, arr) {
   elem.style.backgroundColor = getRandomArrayIndex(arr);
 };
@@ -177,15 +150,15 @@ var getRandomBgColor = function (elem, arr) {
 // обработчики на клик
 setupWizardCoat.addEventListener('click', function (evt) {
   evt.preventDefault();
-  getRandomColor(setupWizardCoat, wizardCoats);
+  getRandomColor(setupWizardCoat, WIZARD_COATS);
 });
 
 setupWizardEyes.addEventListener('click', function (evt) {
   evt.preventDefault();
-  getRandomColor(setupWizardEyes, wizardEyes);
+  getRandomColor(setupWizardEyes, WIZARD_EYES);
 });
 
 setupFireball.addEventListener('click', function (evt) {
   evt.preventDefault();
-  getRandomBgColor(setupFireball, fireballs);
+  getRandomBgColor(setupFireball, FIREBALLS);
 });
