@@ -1,6 +1,6 @@
 'use strict';
 
-window.eventLisneters = (function () {
+(function () {
 
   window.htmlSelectors.setupOpen.addEventListener('click', function () {
     window.popup.openPopup();

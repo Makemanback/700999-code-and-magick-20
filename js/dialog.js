@@ -1,17 +1,12 @@
 'use strict';
 
-window.dialog = (function () {
-  var userDialog = document.querySelector('.setup');
-  var dialogHandle = userDialog.querySelector('.upload');
-  var userDialogX = 725;
-  var userDialogY = 83;
-
-  var similarListElement = userDialog.querySelector('.setup-similar-list');
+(function () {
+  var similarListElement = window.htmlSelectors.userDialog.querySelector('.setup-similar-list');
   var similarWizardTemplate = document.querySelector('#similar-wizard-template')
     .content
     .querySelector('.setup-similar-item');
 
-  dialogHandle.addEventListener('mousedown', function (evt) {
+  window.htmlSelectors.dialogHandle.addEventListener('mousedown', function (evt) {
     evt.preventDefault();
 
     var startCoords = {
@@ -36,8 +31,8 @@ window.dialog = (function () {
         y: moveEvt.clientY
       };
 
-      userDialog.style.top = (userDialog.offsetTop - shift.y) + 'px';
-      userDialog.style.left = (userDialog.offsetLeft - shift.x) + 'px';
+      window.htmlSelectors.userDialog.style.top = (window.htmlSelectors.userDialog.offsetTop - shift.y) + 'px';
+      window.htmlSelectors.userDialog.style.left = (window.htmlSelectors.userDialog.offsetLeft - shift.x) + 'px';
 
     };
 
@@ -50,9 +45,9 @@ window.dialog = (function () {
       if (dragged) {
         var onClickPreventDefault = function (clickEvt) {
           clickEvt.preventDefault();
-          dialogHandle.removeEventListener('click', onClickPreventDefault);
+          window.htmlSelectors.dialogHandle.removeEventListener('click', onClickPreventDefault);
         };
-        dialogHandle.addEventListener('click', onClickPreventDefault);
+        window.htmlSelectors.dialogHandle.addEventListener('click', onClickPreventDefault);
       }
     };
 
@@ -60,12 +55,8 @@ window.dialog = (function () {
     document.addEventListener('mouseup', onMouseUp);
   });
 
-  return {
-    userDialog: userDialog,
-    dialogHandle: dialogHandle,
+  window.dialog = {
     similarListElement: similarListElement,
     similarWizardTemplate: similarWizardTemplate,
-    userDialogX: userDialogX,
-    userDialogY: userDialogY
   };
 })();

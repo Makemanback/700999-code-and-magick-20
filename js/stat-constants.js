@@ -1,6 +1,6 @@
 'use strict';
 
-window.statConstants = (function () {
+  (function () {
   var CLOUD_WIDTH = 420;
   var CLOUD_HEIGHT = 270;
   var CLOUD_X = 100;
@@ -15,7 +15,7 @@ window.statConstants = (function () {
   var BAR_HEIGHT_TOTAL = 240;
   var BLACK_COLOR = '#000';
 
-  return {
+  window.statConstants = {
     CLOUD_WIDTH: CLOUD_WIDTH,
     CLOUD_HEIGHT: CLOUD_HEIGHT,
     CLOUD_X: CLOUD_X,

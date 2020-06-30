@@ -1,6 +1,6 @@
 'use strict';
 
-window.constants = (function () {
+(function () {
   var WIZARD_NAMES = ['Иван', 'Хуан Себастьян', 'Мария', 'Кристоф', 'Виктор', 'Юлия', 'Люпита', 'Вашингтон'];
   var WIZARD_SURNAMES = ['Да Марья', 'Вирон', 'Мирабелла', 'Вальц', 'Онопко', 'Топольницкая', 'Нионго', 'Ирвинг'];
   var COAT_COLORS = [
@@ -35,9 +35,11 @@ window.constants = (function () {
     'rgb(215, 210, 55)',
     'rgb(0, 0, 0)'
   ];
+  var USER_DIALOG_X = 725;
+  var USER_DIALOG_Y = 83;
 
 
-  return {
+  window.constants = {
     WIZARD_NAMES: WIZARD_NAMES,
     WIZARD_SURNAMES: WIZARD_SURNAMES,
     COAT_COLORS: COAT_COLORS,
@@ -46,6 +48,8 @@ window.constants = (function () {
     FIREBALLS: FIREBALLS,
     WIZARD_EYES: WIZARD_EYES,
     WIZARD_COATS: WIZARD_COATS,
+    USER_DIALOG_X: USER_DIALOG_X,
+    USER_DIALOG_Y: USER_DIALOG_Y
   };
 })();
 

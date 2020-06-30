@@ -1,6 +1,7 @@
 'use strict';
 
-window.htmlSelectors = (function () {
+(function () {
+  var userDialog = document.querySelector('.setup');
   var setupForm = document.querySelector('.setup-wizard-form');
   var setupOpen = document.querySelector('.setup-open');
   var setupClose = document.querySelector('.setup-close');
@@ -9,8 +10,10 @@ window.htmlSelectors = (function () {
   var setupWizardCoat = setupForm.querySelector('.wizard-coat');
   var setupWizardEyes = setupForm.querySelector('.wizard-eyes');
   var setupFireball = setupForm.querySelector('.setup-fireball-wrap');
+  var dialogHandle = userDialog.querySelector('.upload');
 
-  return {
+  window.htmlSelectors = {
+    userDialog: userDialog,
     setupForm: setupForm,
     setupOpen: setupOpen,
     setupClose: setupClose,
@@ -18,6 +21,7 @@ window.htmlSelectors = (function () {
     setupSubmit: setupSubmit,
     setupWizardCoat: setupWizardCoat,
     setupWizardEyes: setupWizardEyes,
-    setupFireball: setupFireball
+    setupFireball: setupFireball,
+    dialogHandle: dialogHandle,
   };
 })();

@@ -1,6 +1,6 @@
 'use strict';
 
-window.randomFunctions = (function () {
+(function () {
   var getRandomArrayIndex = function (array) {
     return array[Math.floor(Math.random() * array.length)];
   };
@@ -14,7 +14,7 @@ window.randomFunctions = (function () {
     elem.style.backgroundColor = window.randomFunctions.getRandomArrayIndex(arr);
   };
 
-  return {
+  window.randomFunctions = {
     getRandomArrayIndex: getRandomArrayIndex,
     getRandomColor: getRandomColor,
     getRandomBgColor: getRandomBgColor

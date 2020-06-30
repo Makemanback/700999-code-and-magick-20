@@ -1,6 +1,6 @@
 'use strict';
 
-window.statCloud = (function () {
+(function () {
   // рисуем облака
   var renderCloud = function (ctx, x, y, color) {
     ctx.fillStyle = color;
@@ -52,12 +52,5 @@ window.statCloud = (function () {
       ctx.fillStyle = window.statConstants.BLACK_COLOR;
       ctx.fillText(Math.floor(times[i]), barTotalPositionX, -barTotalSizeY + window.statConstants.BAR_HEIGHT_TOTAL - window.statConstants.GAP);
     }
-  };
-
-  return {
-    renderCloud: renderCloud,
-    renderText: renderText,
-    getMaxElement: getMaxElement,
-
   };
 })();
