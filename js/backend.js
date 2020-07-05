@@ -68,7 +68,7 @@
     document.body.insertAdjacentElement('afterbegin', node);
   };
 
-  var successMessage = function (successMessage) {
+  var successMessage = function (message) {
     var node = document.createElement('div');
     node.style = 'z-index: 100; margin: 0 auto; text-align: center; background-color: green;';
     node.style.position = 'absolute';
@@ -76,9 +76,9 @@
     node.style.right = 0;
     node.style.fontSize = '30px';
 
-    node.textContent = successMessage;
+    node.textContent = message;
     document.body.insertAdjacentElement('afterbegin', node);
-  }
+  };
 
   window.load(successHandler, errorHandler);
 
@@ -94,14 +94,14 @@
 
   var sendURL = 'https://javascript.pages.academy/code-and-magick';
 
-  window.save = function (data, onLoad, onError, successMessage) {
+  window.save = function (data, onLoad, onError, onSuccess) {
     var xhr = new XMLHttpRequest();
     xhr.responseType = 'json';
 
     xhr.addEventListener('load', function () {
       if (xhr.status === StatusCode.OK) {
         onLoad(xhr.response);
-        successMessage('Отправка данных прошла успешно');
+        onSuccess('Отправка данных прошла успешно');
       } else if (xhr.status === StatusCode.notSuppot) {
         onError('Метод передачи данных не поддерживается');
       } else {
