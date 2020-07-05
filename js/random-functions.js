@@ -14,9 +14,14 @@
     elem.style.backgroundColor = window.randomFunctions.getRandomArrayIndex(arr);
   };
 
+  var getRandomArray = function (array) {
+    return array.slice(Math.round(Math.random() * array.length));
+  };
+
   window.randomFunctions = {
     getRandomArrayIndex: getRandomArrayIndex,
     getRandomColor: getRandomColor,
-    getRandomBgColor: getRandomBgColor
+    getRandomBgColor: getRandomBgColor,
+    getRandomArray: getRandomArray
   };
 })();
