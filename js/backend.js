@@ -2,7 +2,6 @@
 
 (function () {
   var MAX_SIMILAR_WIZARD_COUNT = 4;
-  var URL = 'https://javascript.pages.academy/code-and-magick/data';
   // var URL = 'js/server.json';
   var StatusCode = {
     OK: 200,
@@ -10,7 +9,7 @@
   };
   var TIMEOUT_IN_MS = 10000;
 
-  window.load = function (onLoad, onError) {
+  window.load = function (URL, onLoad, onError) {
     var xhr = new XMLHttpRequest();
     xhr.responseType = 'json';
 
@@ -34,22 +33,11 @@
     xhr.send();
   };
 
-  var similarWizardTemplate = document.querySelector('#similar-wizard-template').content;
-
-  var renderWizard = function (wizard) {
-    var wizardElement = similarWizardTemplate.cloneNode(true);
-
-    wizardElement.querySelector('.setup-similar-label').textContent = wizard.name;
-    wizardElement.querySelector('.wizard-coat').style.fill = wizard.colorCoat;
-
-    return wizardElement;
-  };
-
   var successHandler = function (wizards) {
     var fragment = document.createDocumentFragment();
 
     for (var i = 0; i < MAX_SIMILAR_WIZARD_COUNT; i++) {
-      fragment.appendChild(renderWizard(wizards[i]));
+      fragment.appendChild(window.dialog.renderWizard(wizards[i]));
     }
     window.htmlSelectors.similarListElement.appendChild(fragment);
 
@@ -80,28 +68,28 @@
     document.body.insertAdjacentElement('afterbegin', node);
   };
 
-  window.load(successHandler, errorHandler);
+  window.load('https://javascript.pages.academy/code-and-magick/data', successHandler, errorHandler);
+
+  var closeDialog = function () {
+    window.htmlSelectors.userDialog.classList.add('hidden');
+  }
 
   var form = window.htmlSelectors.userDialog.querySelector('.setup-wizard-form');
   var submitHandler = function (evt) {
-    window.save(new FormData(form), function () {
-      window.htmlSelectors.userDialog.classList.add('hidden');
-    }, errorHandler, successMessage);
+    window.save('https://javascript.pages.academy/code-and-magick', new FormData(form), closeDialog, errorHandler, successMessage);
     evt.preventDefault();
   };
   form.addEventListener('submit', submitHandler);
 
 
-  var sendURL = 'https://javascript.pages.academy/code-and-magick';
-
-  window.save = function (data, onLoad, onError, onSuccess) {
+  window.save = function (sendURL, data, onLoad, onError, successMessage) {
     var xhr = new XMLHttpRequest();
     xhr.responseType = 'json';
 
     xhr.addEventListener('load', function () {
       if (xhr.status === StatusCode.OK) {
         onLoad(xhr.response);
-        onSuccess('Отправка данных прошла успешно');
+        successMessage('Данные отправлены успешно');
       } else if (xhr.status === StatusCode.notSuppot) {
         onError('Метод передачи данных не поддерживается');
       } else {

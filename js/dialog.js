@@ -55,8 +55,20 @@
     document.addEventListener('mouseup', onMouseUp);
   });
 
+  var similarWizardTemplate = document.querySelector('#similar-wizard-template').content;
+
+  var renderWizard = function (wizard) {
+    var wizardElement = similarWizardTemplate.cloneNode(true);
+
+    wizardElement.querySelector('.setup-similar-label').textContent = wizard.name;
+    wizardElement.querySelector('.wizard-coat').style.fill = wizard.colorCoat;
+
+    return wizardElement;
+  };
+
   window.dialog = {
     similarListElement: similarListElement,
     similarWizardTemplate: similarWizardTemplate,
+    renderWizard: renderWizard
   };
 })();
