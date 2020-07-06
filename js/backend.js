@@ -72,7 +72,7 @@
 
   var closeDialog = function () {
     window.htmlSelectors.userDialog.classList.add('hidden');
-  }
+  };
 
   var form = window.htmlSelectors.userDialog.querySelector('.setup-wizard-form');
   var submitHandler = function (evt) {
@@ -82,14 +82,14 @@
   form.addEventListener('submit', submitHandler);
 
 
-  window.save = function (sendURL, data, onLoad, onError, successMessage) {
+  window.save = function (sendURL, data, onLoad, onError, onSuccess) {
     var xhr = new XMLHttpRequest();
     xhr.responseType = 'json';
 
     xhr.addEventListener('load', function () {
       if (xhr.status === StatusCode.OK) {
         onLoad(xhr.response);
-        successMessage('Данные отправлены успешно');
+        onSuccess('Данные отправлены успешно');
       } else if (xhr.status === StatusCode.notSuppot) {
         onError('Метод передачи данных не поддерживается');
       } else {
