@@ -23,7 +23,12 @@
     }
   });
 
-  window.htmlSelectors.setupSubmit.addEventListener('click', window.popup.onSubmitForm);
+  // window.htmlSelectors.setupSubmit.addEventListener('click', function (evt) {
+  //   evt.preventDefault();
+  //   window.popup.onSubmitForm;
+  //   window.htmlSelectors.userDialog.classList.add('hidden');
+  //   console.log('click')
+  // });
 
   window.htmlSelectors.setupWizardCoat.addEventListener('click', function (evt) {
     evt.preventDefault();

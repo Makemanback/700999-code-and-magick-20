@@ -3,6 +3,7 @@
 (function () {
   var userDialog = document.querySelector('.setup');
   var setupForm = document.querySelector('.setup-wizard-form');
+  var similarListElement = userDialog.querySelector('.setup-similar-list');
   var setupOpen = document.querySelector('.setup-open');
   var setupClose = document.querySelector('.setup-close');
   var setupUserName = setupForm.querySelector('.setup-user-name');
@@ -15,6 +16,7 @@
   window.htmlSelectors = {
     userDialog: userDialog,
     setupForm: setupForm,
+    similarListElement: similarListElement,
     setupOpen: setupOpen,
     setupClose: setupClose,
     setupUserName: setupUserName,
