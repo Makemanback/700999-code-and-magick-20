@@ -1,23 +1,21 @@
 'use strict';
 
 (function () {
-  var MAX_SIMILAR_WIZARD_COUNT = 4;
-  // var URL = 'js/server.json';
+
   var StatusCode = {
     OK: 200,
     notSuppot: 501
   };
-  var TIMEOUT_IN_MS = 10000;
 
-  window.load = function (URL, onLoad, onError) {
+  window.load = function (onSuccess, onError) {
     var xhr = new XMLHttpRequest();
     xhr.responseType = 'json';
 
     xhr.addEventListener('load', function () {
-      if (xhr.status === StatusCode.OK) {
-        onLoad(xhr.response);
+      if (xhr.status === 200) {
+        onSuccess(xhr.response);
       } else {
-        onError('Статус ответа: ' + xhr.status + ' ' + xhr.statusText);
+        onError('Неизвестный статус: ' + xhr.status + ' ' + xhr.statusText);
       }
     });
     xhr.addEventListener('error', function () {
@@ -27,21 +25,10 @@
       onError('Запрос не успел выполниться за ' + xhr.timeout + 'мс');
     });
 
-    xhr.timeout = TIMEOUT_IN_MS;
+    xhr.timeout = 10000; // 10s
 
-    xhr.open('GET', URL);
+    xhr.open('GET', 'https://javascript.pages.academy/code-and-magick/data');
     xhr.send();
-  };
-
-  var successHandler = function (wizards) {
-    var fragment = document.createDocumentFragment();
-
-    for (var i = 0; i < MAX_SIMILAR_WIZARD_COUNT; i++) {
-      fragment.appendChild(window.dialog.renderWizard(wizards[i]));
-    }
-    window.htmlSelectors.similarListElement.appendChild(fragment);
-
-    window.htmlSelectors.userDialog.querySelector('.setup-similar').classList.remove('hidden');
   };
 
   var errorHandler = function (errorMessage) {
@@ -68,15 +55,9 @@
     document.body.insertAdjacentElement('afterbegin', node);
   };
 
-  window.load('https://javascript.pages.academy/code-and-magick/data', successHandler, errorHandler);
-
-  var closeDialog = function () {
-    window.htmlSelectors.userDialog.classList.add('hidden');
-  };
-
-  var form = window.htmlSelectors.userDialog.querySelector('.setup-wizard-form');
+  var form = document.querySelector('.setup-wizard-form');
   var submitHandler = function (evt) {
-    window.save('https://javascript.pages.academy/code-and-magick', new FormData(form), closeDialog, errorHandler, successMessage);
+    window.save('https://javascript.pages.academy/code-and-magick', new FormData(form), window.closeDialog, errorHandler, successMessage);
     evt.preventDefault();
   };
   form.addEventListener('submit', submitHandler);
